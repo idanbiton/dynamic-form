@@ -28,4 +28,4 @@ this is a dynamic form - you can alter the data to render 3 types of UI componen
 
 3 - multi select (checkboxes): usage: type = 'multi_choice'
  
-each type can have a default value(s) to render - please refer to ``types.ts`` file for more info
+each type need to have title to show on screen, and can have a default value(s) to render - please refer to ``types.ts`` file for more info
