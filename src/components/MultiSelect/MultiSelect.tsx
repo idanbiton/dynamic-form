@@ -8,12 +8,13 @@ export const MultiSelect = (props: ChoicesProps) => {
   const { title, choices, current_value, setIsDirty } = props;
   return (
     <>
-      <h2>{ title }</h2>
+      <h3>{ title }</h3>
       <div className={'choices-container'}>
-        {map(choices, (choice: Choice) => {
+        {map(choices, (choice: Choice, index: number) => {
           return <CheckboxComp
             label={choice.value}
             isChecked={current_value.includes(choice.id)}
+            key={index}
             setIsDirty={() => setIsDirty()}
           />
         })}

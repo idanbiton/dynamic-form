@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '@material-ui/core';
 
-import { data } from '../constants/data'
 import { map } from 'lodash';
 import { TextField } from '../TextField';
 import { SingleSelect } from '../SingleSelect';
@@ -9,6 +8,7 @@ import { MultiSelect } from '../MultiSelect';
 import { Choice } from '../constants/types';
 
 import './DynamicForm.css';
+import axios from 'axios';
 
 type Field = {
   key: string;
@@ -20,17 +20,23 @@ type Field = {
 }
 
 export const DynamicForm = () => {
-
-  const [fields] = useState<Field[]>(data);
+  const [fields, setFields] = useState<Field[]>([]);
   const [isDirty, setIsDirty] = useState(false);
 
-  const getComponentType = (props: Field) => {
+  useEffect(() => {
+    axios.get('https://eleos-form.free.beeceptor.com/#').then((res) => {
+      setFields(res.data.fields);
+    })
+  })
+
+  const getComponentType = (props: Field, index: number) => {
     const { type, title, value, choices, current_value } = props;
     switch (type) {
       case 'text':
-        return <TextField title={title} value={value!} setIsDirty={() => setIsDirty(true)}/>;
+        return <TextField key={index} title={title} value={value!} setIsDirty={() => setIsDirty(true)}/>;
       case 'single_choice':
         return <SingleSelect
+          key={index}
           title={title}
           choices={choices!}
           current_value={current_value! as string}
@@ -38,6 +44,7 @@ export const DynamicForm = () => {
         />;
       case 'multi_choice':
         return <MultiSelect
+          key={index}
           title={title}
           choices={choices!}
           current_value={current_value as string[]}
@@ -48,13 +55,15 @@ export const DynamicForm = () => {
   }
   return (
     <>
-      {map(fields, (field: Field) => {
-        return getComponentType(field);
+      <h1 className={'main-header'}> Welcome to your Dynamic Form</h1>
+      {map(fields, (field: Field, index: number) => {
+        return getComponentType(field, index);
       })}
-      <div className={ 'separator' }/>
-      <Button className={'save-button'} variant="contained" color="primary" disabled={!isDirty}>
-        Save
-      </Button>
+      <div className={ 'container' }>
+        <Button className={'save-button'} variant="contained" color="primary" disabled={!isDirty}>
+          Save
+        </Button>
+      </div>
     </>
     );
 }

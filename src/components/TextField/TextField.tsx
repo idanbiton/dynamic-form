@@ -10,7 +10,7 @@ export const TextField = (props: Props) => {
 
   return (
     <>
-      <h2> {title} </h2>
+      <h3 className={'header'}> {title} </h3>
       <TextareaAutosize className={'text-field'} defaultValue={value} minRows={3} onChange={setIsDirty}/>
     </>
   )

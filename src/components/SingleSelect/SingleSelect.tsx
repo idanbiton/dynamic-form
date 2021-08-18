@@ -20,11 +20,11 @@ export const SingleSelect = (props: ChoicesProps) => {
 
   return (
     <FormControl>
-      <h2>{title}</h2>
+      <h3>{title}</h3>
       <RadioGroup value={value} onChange={handleChange}>
         <div className={'choices-container'}>
-          {map(choices, (choice: Choice) => {
-            return <FormControlLabel value={choice.id} control={<Radio color={'primary'}/>} label={choice.value} />
+          {map(choices, (choice: Choice, index: number) => {
+            return <FormControlLabel key={index} value={choice.id} control={<Radio color={'primary'}/>} label={choice.value} />
           })}
         </div>
       </RadioGroup>

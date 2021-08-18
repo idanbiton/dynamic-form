@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  font-family: 'Kalam', cursive;
+  font-family: 'JetBrains Mono', monospace;
 }
 
 .App-logo {
@@ -15,7 +15,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #B3C7D6FF;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
