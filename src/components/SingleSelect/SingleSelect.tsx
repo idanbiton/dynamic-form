@@ -9,12 +9,13 @@ import './SingleSelect.css';
 
 export const SingleSelect = (props: ChoicesProps) => {
 
-  const { title, choices } = props;
+  const { title, choices, setIsDirty } = props;
 
   const [value, setValue] = useState(props.current_value);
 
   const handleChange = (event: any) => {
     setValue(event.target.value);
+    setIsDirty();
   }
 
   return (

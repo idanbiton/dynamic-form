@@ -16,4 +16,5 @@ export type ChoicesProps = {
   title: string;
   choices: Choice[];
   current_value: string | string[];
+  setIsDirty: () => void;
 }

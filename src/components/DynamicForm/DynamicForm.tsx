@@ -19,24 +19,33 @@ type Field = {
   current_value?: string | string[];
 }
 
-const getComponentType = (props: Field) => {
-  const { type, title, value, choices, current_value } = props;
-  switch (type) {
-    case 'text':
-      return <TextField title={title} value={value!}/>;
-    case 'single_choice':
-      return <SingleSelect title={title} choices={choices!} current_value={current_value! as string}/>;
-    case 'multi_choice':
-      return <MultiSelect title={title} choices={choices!} current_value={current_value as string[]}/>;
-    default:
-      return <></>;
-  }
-}
-
 export const DynamicForm = () => {
 
   const [fields] = useState<Field[]>(data);
-  const [isDirty, setIsDirty] = useState(false)
+  const [isDirty, setIsDirty] = useState(false);
+
+  const getComponentType = (props: Field) => {
+    const { type, title, value, choices, current_value } = props;
+    switch (type) {
+      case 'text':
+        return <TextField title={title} value={value!} setIsDirty={() => setIsDirty(true)}/>;
+      case 'single_choice':
+        return <SingleSelect
+          title={title}
+          choices={choices!}
+          current_value={current_value! as string}
+          setIsDirty={() => setIsDirty(true)}
+        />;
+      case 'multi_choice':
+        return <MultiSelect
+          title={title}
+          choices={choices!}
+          current_value={current_value as string[]}
+          setIsDirty={() => setIsDirty(true)}/>;
+      default:
+        return <></>;
+    }
+  }
   return (
     <>
       {map(fields, (field: Field) => {

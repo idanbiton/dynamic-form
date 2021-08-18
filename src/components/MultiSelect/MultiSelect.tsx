@@ -5,13 +5,17 @@ import './MultiSelect.css';
 
 export const MultiSelect = (props: ChoicesProps) => {
 
-  const { title, choices, current_value } = props;
+  const { title, choices, current_value, setIsDirty } = props;
   return (
     <>
       <h2>{ title }</h2>
       <div className={'choices-container'}>
         {map(choices, (choice: Choice) => {
-          return <CheckboxComp label={choice.value} isChecked={current_value.includes(choice.id)}/>
+          return <CheckboxComp
+            label={choice.value}
+            isChecked={current_value.includes(choice.id)}
+            setIsDirty={() => setIsDirty()}
+          />
         })}
       </div>
     </>
