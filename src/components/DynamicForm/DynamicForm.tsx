@@ -5,19 +5,10 @@ import { map } from 'lodash';
 import { TextField } from '../TextField';
 import { SingleSelect } from '../SingleSelect';
 import { MultiSelect } from '../MultiSelect';
-import { Choice } from '../constants/types';
+import { Field } from '../constants/types';
 
 import './DynamicForm.css';
 import axios from 'axios';
-
-type Field = {
-  key: string;
-  title: string;
-  type: string;
-  value?: string;
-  choices?: Choice[];
-  current_value?: string | string[];
-}
 
 export const DynamicForm = () => {
   const [fields, setFields] = useState<Field[]>([]);
